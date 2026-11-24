@@ -1,0 +1,45 @@
+{% extends "navbar_footer.html" %}
+{% block titulo %}Nueva cita{% endblock %}
+{% block contenido %}
+<div class="encabezado">
+  <div>
+    <h1>Agendar cita</h1>
+    <p>Selecciona paciente, médico y horario</p>
+  </div>
+</div>
+
+<form class="tarjeta" method="post" style="max-width:760px">
+  <div class="fila">
+    <div class="campo">
+      <label for="paciente">Paciente</label>
+      <select id="paciente" name="paciente" required>
+        {% for p in pacientes %}<option>{{ p.nombre }}</option>{% endfor %}
+      </select>
+    </div>
+    <div class="campo">
+      <label for="medico">Médico</label>
+      <select id="medico" name="medico" required>
+        {% for m in medicos %}<option {{ 'disabled' if not m.disponible }}>{{ m.nombre }}</option>{% endfor %}
+      </select>
+    </div>
+  </div>
+  <div class="fila">
+    <div class="campo">
+      <label for="fecha">Fecha</label>
+      <input type="date" id="fecha" name="fecha" min="{{ hoy }}" required>
+    </div>
+    <div class="campo">
+      <label for="hora">Hora</label>
+      <input type="time" id="hora" name="hora" required>
+    </div>
+  </div>
+  <div class="campo">
+    <label for="motivo">Motivo de la consulta</label>
+    <textarea id="motivo" name="motivo" rows="3" required></textarea>
+  </div>
+  <div class="acciones">
+    <a class="boton secundario" href="{{ url_for('citas') }}">Cancelar</a>
+    <button class="boton" type="submit">Agendar cita</button>
+  </div>
+</form>
+{% endblock %}

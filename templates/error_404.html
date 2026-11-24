@@ -1,0 +1,10 @@
+{% extends "navbar_footer.html" %}
+{% block titulo %}Página no encontrada{% endblock %}
+{% block contenido %}
+<div class="error-pagina">
+  <p class="codigo">404</p>
+  <h1>Página no encontrada</h1>
+  <p style="color:var(--suave)">La página que buscas no existe o fue movida.</p>
+  <a class="boton" href="{{ url_for('panel') }}">Volver al panel</a>
+</div>
+{% endblock %}

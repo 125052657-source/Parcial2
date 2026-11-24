@@ -1,0 +1,40 @@
+{% extends "navbar_footer.html" %}
+{% block titulo %}Panel{% endblock %}
+{% block contenido %}
+<div class="encabezado">
+  <div>
+    <h1>Hola, {{ usuario or 'Doctor' }}</h1>
+    <p>Resumen de la actividad de la clínica · {{ hoy }}</p>
+  </div>
+  <a class="boton" href="{{ url_for('nueva_cita') }}">+ Agendar cita</a>
+</div>
+
+<div class="rejilla">
+  <div class="indicador"><div class="etiqueta">Pacientes registrados</div><div class="valor">{{ resumen.pacientes }}</div></div>
+  <div class="indicador"><div class="etiqueta">Citas programadas</div><div class="valor">{{ resumen.citas }}</div></div>
+  <div class="indicador"><div class="etiqueta">Médicos</div><div class="valor">{{ resumen.medicos }}</div></div>
+  <div class="indicador"><div class="etiqueta">Por cobrar</div><div class="valor">${{ '%.2f' % resumen.pendiente }}</div></div>
+</div>
+
+<div class="tarjeta">
+  <h2>Próximas citas</h2>
+  <table>
+    <tr><th>Fecha y hora</th><th>Paciente</th><th>Médico</th><th>Motivo</th><th>Estado</th></tr>
+    {% for c in citas %}
+    <tr>
+      <td>{{ c.fecha }} {{ c.hora }}</td>
+      <td>{{ c.paciente }}</td>
+      <td>{{ c.medico }}</td>
+      <td>{{ c.motivo }}</td>
+      <td><span class="etiqueta-estado estado-{{ c.estado.split()[0] }}">{{ c.estado }}</span></td>
+    </tr>
+    {% endfor %}
+  </table>
+</div>
+
+<div class="rejilla">
+  <a class="tarjeta" href="{{ url_for('nuevo_paciente') }}"><h2>Registrar paciente</h2><p style="color:var(--suave)">Alta de un nuevo expediente.</p></a>
+  <a class="tarjeta" href="{{ url_for('nueva_consulta') }}"><h2>Nueva consulta</h2><p style="color:var(--suave)">Registrar diagnóstico y notas.</p></a>
+  <a class="tarjeta" href="{{ url_for('facturacion') }}"><h2>Facturación</h2><p style="color:var(--suave)">Pagos y cobros pendientes.</p></a>
+</div>
+{% endblock %}

@@ -1,0 +1,33 @@
+{% extends "navbar_footer.html" %}
+{% block titulo %}Médicos{% endblock %}
+{% block contenido %}
+<div class="encabezado">
+  <div>
+    <h1>Médicos</h1>
+    <p>Personal médico, especialidades y horarios</p>
+  </div>
+</div>
+
+<div class="rejilla">
+  {% for m in medicos %}
+  <div class="tarjeta">
+    <div style="display:flex;gap:14px;align-items:center;margin-bottom:12px">
+      <div class="avatar">{{ m.nombre.split()[1][0] }}</div>
+      <div>
+        <strong>{{ m.nombre }}</strong><br>
+        <span style="color:var(--suave)">{{ m.especialidad }}</span>
+      </div>
+    </div>
+    <dl class="datos">
+      <dt>Consultorio</dt><dd>{{ m.consultorio }}</dd>
+      <dt>Horario</dt><dd>{{ m.horario }}</dd>
+    </dl>
+    {% if m.disponible %}
+    <span class="etiqueta-estado estado-Disponible">Disponible</span>
+    {% else %}
+    <span class="etiqueta-estado estado-No">No disponible</span>
+    {% endif %}
+  </div>
+  {% endfor %}
+</div>
+{% endblock %}

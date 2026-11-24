@@ -1,0 +1,35 @@
+{% extends "navbar_footer.html" %}
+{% block titulo %}Receta R-{{ '%04d' % receta.id }}{% endblock %}
+{% block contenido %}
+<div class="encabezado no-imprimir">
+  <a href="{{ url_for('recetas') }}">← Volver a recetas</a>
+  <button class="boton" onclick="window.print()">Imprimir receta</button>
+</div>
+
+<div class="tarjeta receta">
+  <div class="cabecera">
+    <div>
+      <strong style="font-size:1.2rem;color:var(--primario)">✚ Sistema Médico General</strong><br>
+      <span style="color:var(--suave)">{{ receta.medico }}</span>
+    </div>
+    <div style="text-align:right">
+      <strong>Folio R-{{ '%04d' % receta.id }}</strong><br>
+      <span style="color:var(--suave)">{{ receta.fecha }}</span>
+    </div>
+  </div>
+
+  <p><strong>Paciente:</strong> {{ receta.paciente }}</p>
+
+  <h2>Rx</h2>
+  <table>
+    <tr><th>Medicamento</th><th>Indicaciones</th></tr>
+    {% for m in receta.medicamentos %}
+    <tr><td><strong>{{ m.nombre }}</strong></td><td>{{ m.dosis }}</td></tr>
+    {% endfor %}
+  </table>
+
+  <p style="margin-top:60px;text-align:center;border-top:1px solid var(--borde);padding-top:8px;width:260px;margin-left:auto;margin-right:auto">
+    Firma del médico
+  </p>
+</div>
+{% endblock %}

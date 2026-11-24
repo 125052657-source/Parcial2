@@ -1,0 +1,14 @@
+{% extends "base_acceso.html" %}
+{% block titulo %}Recuperar contraseña{% endblock %}
+{% block contenido %}
+<h1>Recuperar contraseña</h1>
+<p class="subtitulo">Te enviaremos un enlace para restablecerla</p>
+<form method="post">
+  <div class="campo">
+    <label for="correo">Correo electrónico</label>
+    <input type="email" id="correo" name="correo" required>
+  </div>
+  <button class="boton ancho" type="submit">Enviar enlace</button>
+</form>
+<p class="pie-acceso"><a href="{{ url_for('iniciar_sesion') }}">← Volver a iniciar sesión</a></p>
+{% endblock %}

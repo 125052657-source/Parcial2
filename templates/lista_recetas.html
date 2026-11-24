@@ -1,0 +1,26 @@
+{% extends "navbar_footer.html" %}
+{% block titulo %}Recetas{% endblock %}
+{% block contenido %}
+<div class="encabezado">
+  <div>
+    <h1>Recetas médicas</h1>
+    <p>Recetas emitidas a pacientes</p>
+  </div>
+</div>
+
+<div class="tarjeta">
+  <table>
+    <tr><th>Folio</th><th>Fecha</th><th>Paciente</th><th>Médico</th><th>Medicamentos</th><th></th></tr>
+    {% for r in recetas %}
+    <tr>
+      <td>R-{{ '%04d' % r.id }}</td>
+      <td>{{ r.fecha }}</td>
+      <td>{{ r.paciente }}</td>
+      <td>{{ r.medico }}</td>
+      <td>{{ r.medicamentos|length }}</td>
+      <td><a class="boton secundario pequeno" href="{{ url_for('ver_receta', id=r.id) }}">Ver receta</a></td>
+    </tr>
+    {% endfor %}
+  </table>
+</div>
+{% endblock %}

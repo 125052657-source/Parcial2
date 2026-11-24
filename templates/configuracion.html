@@ -1,0 +1,36 @@
+{% extends "navbar_footer.html" %}
+{% block titulo %}Configuración{% endblock %}
+{% block contenido %}
+<div class="encabezado">
+  <div>
+    <h1>Configuración</h1>
+    <p>Preferencias del sistema y seguridad</p>
+  </div>
+</div>
+
+<form method="post" style="max-width:760px">
+  <div class="tarjeta">
+    <h2>Clínica</h2>
+    <div class="fila">
+      <div class="campo"><label for="clinica">Nombre de la clínica</label><input id="clinica" name="clinica" value="Sistema Médico General"></div>
+      <div class="campo"><label for="duracion">Duración de cita (min)</label><input id="duracion" name="duracion" type="number" value="30"></div>
+    </div>
+  </div>
+
+  <div class="tarjeta">
+    <h2>Notificaciones</h2>
+    <label style="font-weight:400"><input type="checkbox" name="recordatorios" checked style="width:auto"> Enviar recordatorio de cita a pacientes</label>
+    <label style="font-weight:400"><input type="checkbox" name="resumen" style="width:auto"> Recibir resumen diario por correo</label>
+  </div>
+
+  <div class="tarjeta">
+    <h2>Cambiar contraseña</h2>
+    <div class="campo"><label for="actual">Contraseña actual</label><input type="password" id="actual" name="actual"></div>
+    <div class="fila">
+      <div class="campo"><label for="nueva">Nueva contraseña</label><input type="password" id="nueva" name="nueva"></div>
+      <div class="campo"><label for="confirmar">Confirmar</label><input type="password" id="confirmar" name="confirmar"></div>
+    </div>
+    <div class="acciones"><button class="boton" type="submit">Guardar configuración</button></div>
+  </div>
+</form>
+{% endblock %}

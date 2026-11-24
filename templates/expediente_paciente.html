@@ -1,0 +1,67 @@
+{% extends "navbar_footer.html" %}
+{% block titulo %}Expediente{% endblock %}
+{% block contenido %}
+<div class="encabezado">
+  <div style="display:flex;gap:16px;align-items:center">
+    <div class="avatar">{{ paciente.nombre[0] }}</div>
+    <div>
+      <h1>{{ paciente.nombre }}</h1>
+      <p>Expediente #{{ '%04d' % paciente.id }} · <span class="etiqueta-estado estado-{{ paciente.estado.split()[0] }}">{{ paciente.estado }}</span></p>
+    </div>
+  </div>
+  <div style="display:flex;gap:8px">
+    <a class="boton secundario" href="{{ url_for('nueva_cita') }}">Agendar cita</a>
+    <a class="boton" href="{{ url_for('nueva_consulta', paciente=paciente.id) }}">+ Nueva consulta</a>
+  </div>
+</div>
+
+<div class="dos-columnas">
+  <div class="tarjeta">
+    <h2>Datos generales</h2>
+    <dl class="datos">
+      <dt>Edad</dt><dd>{{ paciente.edad }} años</dd>
+      <dt>Sexo</dt><dd>{{ paciente.sexo }}</dd>
+      <dt>Tipo de sangre</dt><dd>{{ paciente.sangre }}</dd>
+      <dt>Alergias</dt><dd>{{ paciente.alergias }}</dd>
+      <dt>Teléfono</dt><dd>{{ paciente.telefono }}</dd>
+      <dt>Correo</dt><dd>{{ paciente.correo }}</dd>
+    </dl>
+  </div>
+
+  <div>
+    <div class="tarjeta">
+      <h2>Historial clínico</h2>
+      {% if historial %}
+      <div class="linea-tiempo">
+        {% for h in historial|sort(attribute='fecha', reverse=true) %}
+        <div class="evento">
+          <div class="fecha">{{ h.fecha }} · {{ h.medico }}</div>
+          <strong>{{ h.diagnostico }}</strong>
+          <div>{{ h.notas }}</div>
+        </div>
+        {% endfor %}
+      </div>
+      {% else %}
+      <p class="vacio">Sin consultas registradas.</p>
+      {% endif %}
+    </div>
+
+    <div class="tarjeta">
+      <h2>Citas</h2>
+      <table>
+        <tr><th>Fecha</th><th>Médico</th><th>Motivo</th><th>Estado</th></tr>
+        {% for c in citas %}
+        <tr>
+          <td>{{ c.fecha }} {{ c.hora }}</td>
+          <td>{{ c.medico }}</td>
+          <td>{{ c.motivo }}</td>
+          <td><span class="etiqueta-estado estado-{{ c.estado }}">{{ c.estado }}</span></td>
+        </tr>
+        {% else %}
+        <tr><td colspan="4" class="vacio">Sin citas.</td></tr>
+        {% endfor %}
+      </table>
+    </div>
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,19 @@
+{% extends "base_acceso.html" %}
+{% block titulo %}Iniciar sesión{% endblock %}
+{% block contenido %}
+<h1>Bienvenido de nuevo</h1>
+<p class="subtitulo">Ingresa a tu cuenta para continuar</p>
+<form method="post">
+  <div class="campo">
+    <label for="correo">Correo electrónico</label>
+    <input type="email" id="correo" name="correo" placeholder="doctor@clinica.com" required>
+  </div>
+  <div class="campo">
+    <label for="contrasena">Contraseña</label>
+    <input type="password" id="contrasena" name="contrasena" placeholder="••••••••" required>
+  </div>
+  <p style="text-align:right;margin-top:-6px"><a href="{{ url_for('recuperar_contrasena') }}">¿Olvidaste tu contraseña?</a></p>
+  <button class="boton ancho" type="submit">Iniciar sesión</button>
+</form>
+<p class="pie-acceso">¿No tienes cuenta? <a href="{{ url_for('registro') }}">Regístrate</a></p>
+{% endblock %}

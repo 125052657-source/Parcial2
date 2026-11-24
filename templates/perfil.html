@@ -1,0 +1,30 @@
+{% extends "navbar_footer.html" %}
+{% block titulo %}Mi perfil{% endblock %}
+{% block contenido %}
+<div class="encabezado">
+  <div>
+    <h1>Mi perfil</h1>
+    <p>Información de tu cuenta</p>
+  </div>
+</div>
+
+<div class="dos-columnas">
+  <div class="tarjeta" style="text-align:center">
+    <div class="avatar" style="margin:0 auto 12px;width:88px;height:88px;font-size:2rem">{{ (usuario or 'U')[0] }}</div>
+    <h2 style="margin-bottom:0">{{ usuario or 'Usuario' }}</h2>
+    <p style="color:var(--suave)">Médico general</p>
+  </div>
+  <form class="tarjeta" method="post" action="{{ url_for('configuracion') }}">
+    <h2>Datos personales</h2>
+    <div class="fila">
+      <div class="campo"><label for="nombre">Nombre</label><input id="nombre" name="nombre" value="{{ usuario or '' }}"></div>
+      <div class="campo"><label for="cedula">Cédula profesional</label><input id="cedula" name="cedula"></div>
+    </div>
+    <div class="fila">
+      <div class="campo"><label for="telefono">Teléfono</label><input id="telefono" name="telefono"></div>
+      <div class="campo"><label for="especialidad">Especialidad</label><input id="especialidad" name="especialidad" value="Medicina General"></div>
+    </div>
+    <div class="acciones"><button class="boton" type="submit">Guardar cambios</button></div>
+  </form>
+</div>
+{% endblock %}

@@ -1,0 +1,61 @@
+{% extends "navbar_footer.html" %}
+{% block titulo %}Nuevo paciente{% endblock %}
+{% block contenido %}
+<div class="encabezado">
+  <div>
+    <h1>Registrar paciente</h1>
+    <p>Captura los datos para crear un expediente nuevo</p>
+  </div>
+</div>
+
+<form class="tarjeta" method="post">
+  <h2>Datos personales</h2>
+  <div class="campo">
+    <label for="nombre">Nombre completo</label>
+    <input id="nombre" name="nombre" required>
+  </div>
+  <div class="fila">
+    <div class="campo">
+      <label for="edad">Edad</label>
+      <input type="number" id="edad" name="edad" min="0" max="120" required>
+    </div>
+    <div class="campo">
+      <label for="sexo">Sexo</label>
+      <select id="sexo" name="sexo">
+        <option value="F">Femenino</option>
+        <option value="M">Masculino</option>
+        <option value="O">Otro</option>
+      </select>
+    </div>
+    <div class="campo">
+      <label for="sangre">Tipo de sangre</label>
+      <select id="sangre" name="sangre">
+        {% for t in ['O+','O-','A+','A-','B+','B-','AB+','AB-'] %}<option>{{ t }}</option>{% endfor %}
+      </select>
+    </div>
+  </div>
+
+  <h2>Contacto</h2>
+  <div class="fila">
+    <div class="campo">
+      <label for="telefono">Teléfono</label>
+      <input type="tel" id="telefono" name="telefono">
+    </div>
+    <div class="campo">
+      <label for="correo">Correo electrónico</label>
+      <input type="email" id="correo" name="correo">
+    </div>
+  </div>
+
+  <h2>Información médica</h2>
+  <div class="campo">
+    <label for="alergias">Alergias conocidas</label>
+    <textarea id="alergias" name="alergias" rows="3" placeholder="Ej. Penicilina, polen…"></textarea>
+  </div>
+
+  <div class="acciones">
+    <a class="boton secundario" href="{{ url_for('pacientes') }}">Cancelar</a>
+    <button class="boton" type="submit">Guardar paciente</button>
+  </div>
+</form>
+{% endblock %}

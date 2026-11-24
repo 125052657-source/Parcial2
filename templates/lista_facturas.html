@@ -1,0 +1,32 @@
+{% extends "navbar_footer.html" %}
+{% block titulo %}Facturación{% endblock %}
+{% block contenido %}
+<div class="encabezado">
+  <div>
+    <h1>Facturación</h1>
+    <p>Cobros por servicios médicos</p>
+  </div>
+</div>
+
+<div class="rejilla">
+  <div class="indicador"><div class="etiqueta">Total facturado</div><div class="valor">${{ '%.2f' % total }}</div></div>
+  <div class="indicador"><div class="etiqueta">Cobrado</div><div class="valor" style="color:var(--exito)">${{ '%.2f' % pagado }}</div></div>
+  <div class="indicador"><div class="etiqueta">Pendiente</div><div class="valor" style="color:var(--aviso)">${{ '%.2f' % (total - pagado) }}</div></div>
+</div>
+
+<div class="tarjeta">
+  <table>
+    <tr><th>Folio</th><th>Fecha</th><th>Paciente</th><th>Concepto</th><th>Monto</th><th>Estado</th></tr>
+    {% for f in facturas %}
+    <tr>
+      <td>{{ f.id }}</td>
+      <td>{{ f.fecha }}</td>
+      <td>{{ f.paciente }}</td>
+      <td>{{ f.concepto }}</td>
+      <td>${{ '%.2f' % f.monto }}</td>
+      <td><span class="etiqueta-estado estado-{{ f.estado }}">{{ f.estado }}</span></td>
+    </tr>
+    {% endfor %}
+  </table>
+</div>
+{% endblock %}

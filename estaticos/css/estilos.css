@@ -1,0 +1,168 @@
+:root {
+  --primario: #0f766e;
+  --primario-claro: #ccfbf1;
+  --fondo: #f4f7f8;
+  --tarjeta: #ffffff;
+  --texto: #1f2933;
+  --suave: #64748b;
+  --borde: #e2e8f0;
+  --peligro: #dc2626;
+  --aviso: #d97706;
+  --exito: #16a34a;
+  --radio: 12px;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: "Segoe UI", system-ui, sans-serif;
+  background: var(--fondo);
+  color: var(--texto);
+  line-height: 1.5;
+}
+
+a { color: var(--primario); text-decoration: none; }
+a:hover { text-decoration: underline; }
+
+/* ---------- Estructura ---------- */
+.contenedor { display: flex; min-height: 100vh; }
+
+.barra-lateral {
+  width: 240px;
+  background: #0b3b3a;
+  color: #e6fffb;
+  padding: 24px 16px;
+  flex-shrink: 0;
+}
+.barra-lateral .marca { font-size: 1.2rem; font-weight: 700; margin: 0 8px 28px; }
+.barra-lateral .marca span { color: #5eead4; }
+.barra-lateral nav a {
+  display: block;
+  color: #cbd5e1;
+  padding: 10px 12px;
+  border-radius: 8px;
+  margin-bottom: 4px;
+}
+.barra-lateral nav a:hover { background: rgba(255,255,255,.08); text-decoration: none; color: #fff; }
+.barra-lateral nav a.activo { background: var(--primario); color: #fff; }
+.barra-lateral .seccion { font-size: .72rem; text-transform: uppercase; letter-spacing: .08em; color: #7aa5a1; margin: 20px 12px 6px; }
+
+.principal { flex: 1; padding: 28px 36px; min-width: 0; }
+
+.encabezado {
+  display: flex; justify-content: space-between; align-items: center;
+  flex-wrap: wrap; gap: 12px; margin-bottom: 24px;
+}
+.encabezado h1 { margin: 0; font-size: 1.6rem; }
+.encabezado p { margin: 2px 0 0; color: var(--suave); }
+
+/* ---------- Componentes ---------- */
+.tarjeta {
+  background: var(--tarjeta);
+  border: 1px solid var(--borde);
+  border-radius: var(--radio);
+  padding: 20px 24px;
+  margin-bottom: 20px;
+  box-shadow: 0 1px 2px rgba(15, 23, 42, .04);
+}
+.tarjeta h2 { margin-top: 0; font-size: 1.1rem; }
+
+.rejilla { display: grid; gap: 16px; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); margin-bottom: 20px; }
+.dos-columnas { display: grid; gap: 20px; grid-template-columns: 1fr 2fr; }
+
+.indicador { background: var(--tarjeta); border: 1px solid var(--borde); border-radius: var(--radio); padding: 18px 20px; }
+.indicador .etiqueta { color: var(--suave); font-size: .9rem; }
+.indicador .valor { font-size: 1.9rem; font-weight: 700; margin-top: 4px; }
+
+.boton {
+  display: inline-block;
+  background: var(--primario);
+  color: #fff;
+  border: none;
+  padding: 10px 18px;
+  border-radius: 8px;
+  font-size: .95rem;
+  cursor: pointer;
+}
+.boton:hover { background: #115e59; text-decoration: none; }
+.boton.secundario { background: #fff; color: var(--texto); border: 1px solid var(--borde); }
+.boton.secundario:hover { background: #f1f5f9; }
+.boton.peligro { background: var(--peligro); }
+.boton.pequeno { padding: 6px 12px; font-size: .85rem; }
+.boton.ancho { width: 100%; }
+
+table { width: 100%; border-collapse: collapse; }
+th, td { text-align: left; padding: 12px 10px; border-bottom: 1px solid var(--borde); }
+th { font-size: .8rem; text-transform: uppercase; letter-spacing: .04em; color: var(--suave); }
+tr:last-child td { border-bottom: none; }
+
+.etiqueta-estado { display: inline-block; padding: 3px 10px; border-radius: 999px; font-size: .8rem; font-weight: 600; }
+.estado-Activo, .estado-Confirmada, .estado-Pagada, .estado-Disponible { background: #dcfce7; color: #166534; }
+.estado-Pendiente, .estado-En { background: #fef3c7; color: #92400e; }
+.estado-Cancelada, .estado-Inactivo, .estado-No { background: #fee2e2; color: #991b1b; }
+
+/* ---------- Formularios ---------- */
+form .campo { margin-bottom: 16px; }
+label { display: block; font-weight: 600; font-size: .9rem; margin-bottom: 6px; }
+input, select, textarea {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid #cbd5e1;
+  border-radius: 8px;
+  font: inherit;
+  background: #fff;
+}
+input:focus, select:focus, textarea:focus { outline: 2px solid var(--primario-claro); border-color: var(--primario); }
+.fila { display: grid; gap: 16px; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); }
+.acciones { display: flex; gap: 10px; justify-content: flex-end; margin-top: 8px; }
+.busqueda { display: flex; gap: 8px; max-width: 420px; }
+
+/* ---------- Mensajes ---------- */
+.mensaje { padding: 12px 16px; border-radius: 8px; margin-bottom: 16px; }
+.mensaje.exito { background: #dcfce7; color: #166534; }
+.mensaje.error { background: #fee2e2; color: #991b1b; }
+
+/* ---------- Acceso ---------- */
+.pantalla-acceso {
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  background: linear-gradient(135deg, #0b3b3a, #0f766e 60%, #14b8a6);
+  padding: 20px;
+}
+.caja-acceso { background: #fff; width: 100%; max-width: 420px; padding: 36px; border-radius: 16px; box-shadow: 0 20px 50px rgba(0,0,0,.2); }
+.caja-acceso h1 { margin: 0 0 4px; font-size: 1.5rem; }
+.caja-acceso .subtitulo { color: var(--suave); margin: 0 0 24px; }
+.caja-acceso .logo { font-size: 1.1rem; font-weight: 700; color: var(--primario); margin-bottom: 20px; }
+.pie-acceso { text-align: center; margin-top: 18px; font-size: .9rem; color: var(--suave); }
+
+/* ---------- Expediente / perfil ---------- */
+.avatar {
+  width: 64px; height: 64px; border-radius: 50%;
+  background: var(--primario-claro); color: var(--primario);
+  display: grid; place-items: center; font-weight: 700; font-size: 1.4rem;
+}
+.datos dt { color: var(--suave); font-size: .85rem; }
+.datos dd { margin: 0 0 12px; font-weight: 600; }
+.linea-tiempo { border-left: 3px solid var(--primario-claro); padding-left: 18px; }
+.linea-tiempo .evento { margin-bottom: 18px; }
+.linea-tiempo .fecha { color: var(--suave); font-size: .85rem; }
+.vacio { color: var(--suave); text-align: center; padding: 20px; }
+
+.receta { max-width: 720px; }
+.receta .cabecera { display: flex; justify-content: space-between; border-bottom: 2px solid var(--primario); padding-bottom: 12px; margin-bottom: 16px; }
+
+.error-pagina { text-align: center; padding: 80px 20px; }
+.error-pagina .codigo { font-size: 5rem; font-weight: 800; color: var(--primario); margin: 0; }
+
+@media (max-width: 800px) {
+  .contenedor { flex-direction: column; }
+  .barra-lateral { width: 100%; }
+  .dos-columnas { grid-template-columns: 1fr; }
+  .principal { padding: 20px; }
+}
+
+@media print {
+  .barra-lateral, .no-imprimir { display: none; }
+}
